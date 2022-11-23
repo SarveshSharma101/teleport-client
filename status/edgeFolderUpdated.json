@@ -1,0 +1,61 @@
+{
+  "Stats": [
+    {
+      "DE002782": {
+        "Camera": [
+          { "Name": "esp32-01", "Resolution": "latest image does not exist" },
+          { "Name": "esp32-02", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-11", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-12", "Resolution": "latest image does not exist" },
+          { "Name": "esp32-21", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-22", "Resolution": "1600x1200\n" }
+        ],
+        "FolderUpdateTime": "08:25"
+      },
+      "DE002783": {
+        "Camera": [
+          { "Name": "esp32-01", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-02", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-11", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-12", "Resolution": "latest image does not exist" },
+          { "Name": "esp32-21", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-22", "Resolution": "1600x1200\n" }
+        ],
+        "FolderUpdateTime": "08:25"
+      },
+      "DE003321": {
+        "Camera": [
+          { "Name": "esp32-01", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-02", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-11", "Resolution": "latest image does not exist" },
+          { "Name": "esp32-12", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-21", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-22", "Resolution": "1600x1200\n" }
+        ],
+        "FolderUpdateTime": "08:25"
+      },
+      "DE003325": {
+        "Camera": [
+          { "Name": "esp32-01", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-02", "Resolution": "" },
+          { "Name": "esp32-11", "Resolution": "latest image does not exist" },
+          { "Name": "esp32-12", "Resolution": "latest image does not exist" },
+          { "Name": "esp32-21", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-22", "Resolution": "1600x1200\n" }
+        ],
+        "FolderUpdateTime": "08:25"
+      },
+      "DE003497": {
+        "Camera": [
+          { "Name": "esp32-01", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-02", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-11", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-12", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-21", "Resolution": "1600x1200\n" },
+          { "Name": "esp32-22", "Resolution": "1600x1200\n" }
+        ],
+        "FolderUpdateTime": "08:25"
+      }
+    }
+  ]
+}

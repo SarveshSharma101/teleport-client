@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: teleportclient-deployment
+  labels:
+    app: teleportclient
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: teleportclient
+  template:
+    metadata:
+      labels:
+        app: teleportclient
+    spec:
+      containers:
+      - name: teleportclient
+        image: sarveshdockerrepo/teleport-client:0.0.1
