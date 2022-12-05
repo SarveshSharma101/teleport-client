@@ -3,8 +3,8 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-
-  name: teleportclient-deployment
+  name: teleportclient
+  namespace: squirrel-operator
   labels:
     app: teleportclient
 spec:
@@ -17,6 +17,19 @@ spec:
       labels:
         app: teleportclient
     spec:
+      volumes:
+      - name: config
+        projected:
+          defaultMode: 511
+          sources:
+          - secret:
+              name: nvidiauseridentitykey
+          - configMap:
+              name: configs
       containers:
       - name: teleportclient
-        image: sarveshdockerrepo/teleport-client:0.0.1
+        image: sarveshdockerrepo/teleportclient:0.0.8
+        volumeMounts:
+        - name: config
+          mountPath: "/config"
+      serviceAccountName: squirrel-edge-operator-controller-manager

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configs
+  namespace: squirrel-operator
+data:
+  config.yaml: |
+    teleport-address: "fcftport.northeurope.cloudapp.azure.com:443"
