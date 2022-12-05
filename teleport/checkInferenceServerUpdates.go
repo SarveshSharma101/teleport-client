@@ -2,44 +2,54 @@ package teleport
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"os"
 	"os/exec"
 	datamodels "teleport-client/datamodel"
+	"teleport-client/utility"
 )
 
-func TestTeleportSSH() datamodels.Stats {
+func TestTeleportSSH(config utility.Teleport) datamodels.Stats {
 
-	cmd := exec.Command("tsh", "ssh", "--proxy=fcftport.northeurope.cloudapp.azure.com:443", "-i./config/identity.pem", "nvidia@azure-yolov5", "cd vitalStatsCheck && cat stats.json")
+	cmd := exec.Command(config.Tsh, config.TshCommand, config.TeleportProxy, config.Identity, config.InferenceServer, config.SSHCommand)
 
 	stdoutPipe, err := cmd.StdoutPipe()
 	if err != nil {
-		fmt.Println("!!!!!!! Error while tring to init a output pipe ", "err>>", err)
+		log.Println("!!!!!!! Error while tring to init a output pipe ")
+		log.Print("!!! Error >>")
+		panic(err)
 	}
 	stdErrPipe, err := cmd.StderrPipe()
 	if err != nil {
-		fmt.Println("!!!!!!! Error while tring to init a error pipe ", "err>>", err)
+		log.Println("!!!!!!! Error while tring to init a error pipe ")
+		log.Print("!!! Error >>")
+		panic(err)
 	}
 	err = cmd.Start()
 	if err != nil {
-		fmt.Println("!!!!!!! Error while tyring to start the cmd ", "err>>", err)
+		log.Println("!!!!!!! Error while tyring to start the cmd")
+		log.Print("!!! Error >>")
+		panic(err)
 	}
 	cmdOp, err := io.ReadAll(stdoutPipe)
 	if err != nil {
-		fmt.Println("!!!!!!! Error while tring to process command output", "err>>", err)
+		log.Println("!!!!!!! Error while tring to process command output", "err>>", err)
+		log.Print("!!! Error >>")
+		panic(err)
 	}
-	// log.Println("-------->", string(cmdOp))
 	cmdErr, err := io.ReadAll(stdErrPipe)
 	if err != nil {
-		fmt.Println("!!!!!!! Error while tring to process command Error", "err>>", err)
+		log.Println("!!!!!!! Error while tring to process command Error", "err>>", err)
+		log.Print("!!! Error >>")
+		panic(err)
 	}
 	log.Println(string(cmdErr))
 	cmd.Wait()
 	err = writeOpToTxtFile(string(cmdOp), "status/edgeFolderUpdated.json")
 	if err != nil {
 		log.Println("Error while trying to write date to the file")
+		panic(err)
 	}
 	return readfile("status/edgeFolderUpdated.json")
 }
@@ -48,15 +58,16 @@ func writeOpToTxtFile(op, name string) error {
 	log.Println("Creating file with name: ", name)
 	file, err := os.Create(name)
 	if err != nil {
-		log.Println("Error while trying to create file with name: ", name)
-		log.Println("Err >>", err)
-		return nil
+		log.Println("Error while trying to create file with name: ")
+		log.Print("!!! Error >>")
+		return err
 	}
 	opb := []byte(op)
 	noOfBytesWritten, err := file.Write(opb)
 	if noOfBytesWritten < len(opb) || err != nil {
 		log.Println("Program was not able to write complete o/p to the file")
-		log.Println("Err >>", err)
+		log.Print("!!! Error >>")
+		return err
 	}
 	return file.Close()
 }

@@ -1,7 +1,7 @@
 package utility
 
-const CONFIG_FILE = "config/config.yaml"
-const IDENTITY_KEY_FILE = "config/identity.pem"
+const CONFIG_FILE = "./config/config.yaml"
+const IDENTITY_KEY_FILE = "./config/identity.pem"
 const TELEPORT_NAMESPACE = ""
 
 const KUBECONFIG = "kubeconfig"

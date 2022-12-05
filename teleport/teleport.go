@@ -11,9 +11,8 @@ import (
 	"google.golang.org/grpc"
 )
 
-func GetTeleportClient(ctx *context.Context) *client.Client {
+func GetTeleportClient(ctx *context.Context, teleportConfig utility.Teleport) *client.Client {
 	log.Println("Reading the config file")
-	teleportConfig := utility.GetIdentityKey(utility.CONFIG_FILE)
 
 	log.Println("Creating teleport client using adress and indentity key")
 	clt, err := client.New((*ctx), client.Config{
@@ -31,7 +30,8 @@ func GetTeleportClient(ctx *context.Context) *client.Client {
 		Context:                    nil,
 	})
 	if err != nil {
-		log.Println("!!! Error while trying to create the teleport client: ", err)
+		log.Println("!!! Error while trying to create the teleport client: ")
+		panic(err)
 	}
 	return clt
 }
@@ -41,7 +41,7 @@ func GetAvailableNodeList(clt *client.Client, ctx *context.Context) []types.Serv
 	nodes, err := clt.GetNodes(*ctx, utility.TELEPORT_NAMESPACE)
 	if err != nil {
 		log.Println("!!!!! Error while trying to get the list of edges from teleport !!!!")
-		log.Println("!!!! Error >>", err)
+		panic(err)
 	}
 	log.Println("Number of active edges: ", len(nodes))
 	return nodes

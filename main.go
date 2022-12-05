@@ -16,12 +16,12 @@ import (
 )
 
 func main() {
-
+	configs := utility.GetConfigs("./config/config.yaml")
 	log.Println("Setting background context...")
 	ctx := context.Background()
 
 	log.Println("Initiating teleport client....")
-	teleportClt := teleport.GetTeleportClient(&ctx)
+	teleportClt := teleport.GetTeleportClient(&ctx, configs)
 	log.Println("Teleport client created >> ", teleportClt)
 
 	log.Println("Initiating K8 client....")
@@ -37,7 +37,7 @@ func main() {
 			timeToSleep = 1
 		}
 		log.Println("tts value is >> ", timeToSleep)
-		edgeDurations := teleport.TestTeleportSSH()
+		edgeDurations := teleport.TestTeleportSSH(configs)
 
 		log.Println("Getting list of edges from teleport ")
 		actualEdgeList := teleport.GetAvailableNodeList(teleportClt, &ctx)
@@ -91,7 +91,6 @@ func updateTheInferenceServerUpdateDuration(edgeDurations datamodels.Stats, item
 					duration := utility.GetLastUpdateDuration(es.FolderUpdateTime)
 					edge.Status.InferenceServerLastUpdate = duration
 					cmap := make(map[string]edgev1.Camera)
-					// isCamerasPresent := false
 					egc := edgev1.Camera{}
 					for _, esc := range es.Camera {
 						egc.Resolution = esc.Resolution

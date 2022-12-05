@@ -30,7 +30,8 @@ func GetClient() dynamic.Interface {
 		config, err = rest.InClusterConfig()
 		if err != nil {
 			log.Println("!!!!!!!!! Error while trying to load config from service account !!!!!!!!!!!!")
-			log.Print("!!! Error >>", err)
+			log.Print("!!! Error >>")
+			panic(err)
 		}
 	}
 
@@ -38,7 +39,8 @@ func GetClient() dynamic.Interface {
 	dynClient, err := dynamic.NewForConfig(config)
 	if err != nil {
 		log.Println("!!!!!!!!! Error while trying to crete dynamic client !!!!!!!!!!!!")
-		log.Println("!!! Error >> ", err)
+		log.Print("!!! Error >>")
+		panic(err)
 	}
 
 	return dynClient

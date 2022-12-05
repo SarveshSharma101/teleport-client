@@ -11,30 +11,34 @@ import (
 )
 
 type Teleport struct {
-	Identity_key string `yaml:"identity_key"`
-	Address      string `yaml:"address"`
+	// Identity_key string `yaml:"identity_key"`
+	Address         string `yaml:"teleport-address"`
+	Tsh             string `yaml:"tsh"`
+	TshCommand      string `yaml:"tsh-command"`
+	TeleportProxy   string `yaml:"teleport-proxy"`
+	Identity        string `yaml:"identity"`
+	InferenceServer string `yaml:"inference-server"`
+	SSHCommand      string `yaml:"ssh-command"`
 }
 
-func GetIdentityKey(path string) Teleport {
+func GetConfigs(path string) Teleport {
 
 	config, err := os.ReadFile(path)
 	if err != nil {
 		panic(err)
 	}
-
-	teleportConfig := &map[string]Teleport{}
-	err = yaml.Unmarshal(config, teleportConfig)
+	teleportConfig := Teleport{}
+	err = yaml.Unmarshal(config, &teleportConfig)
 	if err != nil {
 		panic(err)
 	}
-
-	return (*teleportConfig)["teleport"]
+	return teleportConfig
 }
 
 func GetLastUpdateDuration(duration string) int {
 	location, err := time.LoadLocation("CET")
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 	tNow := time.Now().In(location)
 	fmt.Println("------------------------>", tNow)
