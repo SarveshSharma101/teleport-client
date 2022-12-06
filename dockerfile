@@ -27,6 +27,7 @@ FROM ubuntu:20.04
 WORKDIR /
 COPY --from=builder /workspace/teleportClient .
 
+RUN mkdir status
 
 RUN apt-get update && apt-get install software-properties-common -y && apt-get install -y gnupg2 && apt-get install -y wget
 

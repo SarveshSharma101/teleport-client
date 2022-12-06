@@ -6,3 +6,9 @@ metadata:
 data:
   config.yaml: |
     teleport-address: "fcftport.northeurope.cloudapp.azure.com:443"
+    tsh: tsh
+    tsh-command: ssh
+    teleport-proxy: --proxy=fcftport.northeurope.cloudapp.azure.com:443
+    identity: -i./config/identity.pem
+    inference-server: nvidia@aws-yolov5
+    ssh-command: cd vitalStatsCheck && cat stats.json

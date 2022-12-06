@@ -28,7 +28,7 @@ spec:
               name: configs
       containers:
       - name: teleportclient
-        image: sarveshdockerrepo/teleportclient:0.0.8
+        image: sarveshdockerrepo/teleportclient:0.1.0
         volumeMounts:
         - name: config
           mountPath: "/config"
